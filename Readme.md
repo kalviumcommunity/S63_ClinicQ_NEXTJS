@@ -1,64 +1,22 @@
-# MediQueue - Digital Hospital Queue Management System
+## MediQueue – Sprint 1 (2.7)
 
-## 📋 About The Project
+**Digital hospital queue management system for Tier-2/3 city hospitals.**
 
-MediQueue is a lightweight, affordable digital queueing system designed for Tier-2/3 city hospitals where medical appointments still depend on physical queues.
+### Folder structure (code)
+- **`mediqueue-web/src/app`**: App Router entry (`layout.tsx`, `page.tsx`) and future route groups / API routes.
+- **`mediqueue-web/src/components`**: Reusable React components (forms, layouts, display widgets).
+- **`mediqueue-web/src/lib`**: Shared config, helpers, and type-safe utilities.
 
-### Problem Statement
-In Tier-2/3 cities, medical appointments still depend on physical queues, leading to:
-- Long wait times with no visibility into queue position
-- Overcrowded waiting rooms
-- Patient frustration and poor experience
-- Inefficient resource allocation
+### Setup & run (local)
+- **Install**: `cd mediqueue-web && npm install`
+- **Dev server**: `npm run dev` then open `http://localhost:3000`
+- **Build**: `npm run build` (ensures production-ready compilation passes)
 
-### Our Solution
-A web-based queue management system that:
-- Works on any phone browser (no app download needed)
-- Sends SMS notifications to patients
-- Can be deployed in 1 day
-- Minimal infrastructure required
+### Architecture docs
+- **High Level Design**: `HLD.md`
+- **Low Level Design**: `LLD.md`
 
----
-
-## 🎯 Key Features
-
-**For Patients:**
-- Generate queue token online via simple web form
-- Receive SMS updates on queue status
-- Check real-time position without login
-- Wait comfortably outside hospital premises
-
-**For Hospital Staff:**
-- Quick token generation for walk-in patients
-- One-click "Call Next Patient" functionality
-- Queue pause/resume during breaks
-- Priority tokens for emergencies
-
-**For Hospital Admin:**
-- Real-time dashboard monitoring all queues
-- Analytics and reports (wait times, patient flow, peak hours)
-- Easy department and staff management
-- Data-driven decision making
-
----
-
-## 🛠️ Technology Stack
-
-- **Frontend:** Next.js 14, React, TypeScript, Tailwind CSS
-- **Backend:** Next.js API Routes
-- **Database:** PostgreSQL (Supabase)
-- **SMS Service:** Twilio / MSG91 / Fast2SMS
-- **Deployment:** Vercel + Supabase
-
----
-
-## 👥 Team Members
-
-- **Anuj Goyal**
-- **Parv Jhanwar**
-- **Suhaan Sharma**
-
-
----
-
-**Built to make healthcare more accessible in Tier-2/3 cities**
+### Sprint 1 reflection
+- **Why this structure**: Mirrors the HLD/LLD layers (app, components, services) and keeps UI, routing, and business helpers clearly separated.
+- **Scalability**: New portals (Patient/Staff/Admin) become new route groups in `src/app`, while shared UI and queue utilities live in `src/components` and `src/lib` without tight coupling.
+- **Next steps**: Wire Supabase, SMS providers, and real-time subscriptions into this base without changing the overall layout.

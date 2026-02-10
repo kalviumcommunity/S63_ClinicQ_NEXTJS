@@ -1,4 +1,4 @@
-## MediQueue – Sprint 1 (2.7, 2.9, 2.10 & 2.14)
+## MediQueue – Sprint 1 (2.7, 2.9, 2.10, 2.14 & 2.15)
 
 **Digital hospital queue management system for Tier-2/3 city hospitals.**
 
@@ -21,6 +21,10 @@
 - **Template**: `mediqueue-web/.env.example` lists all required variables with safe placeholders.
 - **Local secrets**: `mediqueue-web/.env.local` (ignored by Git) holds real DATABASE_URL, AUTH_SECRET, SMS keys, etc. used by Prisma and other services.
 - **Client vs server**: Only `NEXT_PUBLIC_*` values (see `src/lib/publicEnv.ts`) are read in client code; server-only secrets live in `src/lib/serverEnv.ts`.
+
+### Database migrations & seed
+- **Migrations**: defined via Prisma Migrate in `mediqueue-web/prisma/migrations` using `npx prisma migrate dev --name <change>`.
+- **Seed**: `prisma/seed.ts` uses idempotent `upsert` calls to create demo departments, counters, and a default staff user (`npx prisma db seed`).
 
 ### Sprint 1 reflection
 - **Structure**: Mirrors the HLD/LLD layers (app, components, services) and keeps UI, routing, and helpers clearly separated.

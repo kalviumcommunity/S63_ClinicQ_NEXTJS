@@ -1,0 +1,134 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+model Department {
+  id                   String     @id @default(uuid())
+  name                 String     @unique
+  code                 String     @unique
+  avgServiceTimeMinutes Int       @default(15)
+  isActive             Boolean    @default(true)
+  createdAt            DateTime   @default(now())
+  updatedAt            DateTime   @updatedAt
+
+  counters             Counter[]
+  queues               Queue[]
+  dailyStats           DailyStats[]
+  staff                Staff[]
+}
+
+model Counter {
+  id           String    @id @default(uuid())
+  departmentId String
+  counterNumber Int
+  counterCode  String
+  isActive     Boolean   @default(true)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  department   Department @relation(fields: [departmentId], references: [id])
+  tokens       Token[]
+
+  @@unique([departmentId, counterNumber])
+  @@unique([departmentId, counterCode])
+}
+
+model Queue {
+  id                  String    @id @default(uuid())
+  departmentId        String
+  date                DateTime
+  currentTokenNumber  Int       @default(0)
+  isPaused            Boolean   @default(false)
+  pauseMessage        String?
+  resumeTime          DateTime?
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  department          Department @relation(fields: [departmentId], references: [id])
+  tokens              Token[]
+}
+
+model Token {
+  id              String    @id @default(uuid())
+  queueId         String
+  counterId       String?
+  tokenNumber     String    @unique
+  tokenSequence   Int
+  patientName     String
+  patientPhone    String
+  patientAge      Int?
+  visitReason     String?
+  status          TokenStatus @default(WAITING)
+  isPriority      Boolean     @default(false)
+  createdAt       DateTime    @default(now())
+  calledAt        DateTime?
+  servingAt       DateTime?
+  servedAt        DateTime?
+  smsSent         Boolean     @default(false)
+  smsReminderSent Boolean     @default(false)
+  smsTurnSent     Boolean     @default(false)
+  servedByStaffId String?
+  updatedAt       DateTime    @updatedAt
+
+  queue           Queue       @relation(fields: [queueId], references: [id])
+  counter         Counter?    @relation(fields: [counterId], references: [id])
+  smsLogs         SmsLog[]
+}
+
+model Staff {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  passwordHash  String
+  role          String
+  departmentId  String?
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  department    Department? @relation(fields: [departmentId], references: [id])
+}
+
+model SmsLog {
+  id        String   @id @default(uuid())
+  tokenId   String
+  phone     String
+  message   String
+  smsType   String
+  status    String
+  createdAt DateTime @default(now())
+
+  token     Token    @relation(fields: [tokenId], references: [id])
+}
+
+model DailyStats {
+  id            String   @id @default(uuid())
+  departmentId  String
+  date          DateTime
+  totalTokens   Int
+  avgWaitTime   Float
+  peakHoursJson String?
+
+  department    Department @relation(fields: [departmentId], references: [id])
+}
+
+enum TokenStatus {
+  WAITING
+  CALLED
+  SERVING
+  SERVED
+  NO_SHOW
+  CANCELLED
+}

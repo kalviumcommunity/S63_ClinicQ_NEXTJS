@@ -1,4 +1,4 @@
-## MediQueue – Sprint 1 (2.7, 2.9 & 2.10)
+## MediQueue – Sprint 1 (2.7, 2.9, 2.10 & 2.14)
 
 **Digital hospital queue management system for Tier-2/3 city hospitals.**
 
@@ -19,7 +19,7 @@
 
 ### Environment variables
 - **Template**: `mediqueue-web/.env.example` lists all required variables with safe placeholders.
-- **Local secrets**: `mediqueue-web/.env.local` (ignored by Git) holds real DATABASE_URL, AUTH_SECRET, SMS keys, etc.
+- **Local secrets**: `mediqueue-web/.env.local` (ignored by Git) holds real DATABASE_URL, AUTH_SECRET, SMS keys, etc. used by Prisma and other services.
 - **Client vs server**: Only `NEXT_PUBLIC_*` values (see `src/lib/publicEnv.ts`) are read in client code; server-only secrets live in `src/lib/serverEnv.ts`.
 
 ### Sprint 1 reflection
@@ -27,3 +27,4 @@
 - **TypeScript**: Strict mode with `noImplicitAny`, `noUnusedLocals`, and `noUnusedParameters` to catch bugs before runtime.
 - **Linting**: ESLint + Prettier enforce consistent semicolons, double quotes, and formatting on every commit via Husky + lint-staged.
 - **Config**: Environment management follows 12-factor principles; secrets stay in `.env.local`, while `.env.example` makes setup reproducible for all teammates.
+- **Database**: Prisma ORM (see `prisma/schema.prisma` and `src/lib/prisma.ts`) provides a type-safe bridge between Next.js APIs and the PostgreSQL database described in the HLD/LLD.

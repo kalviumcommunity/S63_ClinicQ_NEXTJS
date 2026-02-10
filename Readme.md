@@ -1,4 +1,4 @@
-## MediQueue – Sprint 1 (2.7, 2.9, 2.10, 2.14 & 2.15)
+## MediQueue – Sprint 1 (2.7, 2.9, 2.10, 2.14, 2.15 & 2.16)
 
 **Digital hospital queue management system for Tier-2/3 city hospitals.**
 
@@ -32,3 +32,4 @@
 - **Linting**: ESLint + Prettier enforce consistent semicolons, double quotes, and formatting on every commit via Husky + lint-staged.
 - **Config**: Environment management follows 12-factor principles; secrets stay in `.env.local`, while `.env.example` makes setup reproducible for all teammates.
 - **Database**: Prisma ORM (see `prisma/schema.prisma` and `src/lib/prisma.ts`) provides a type-safe bridge between Next.js APIs and the PostgreSQL database described in the HLD/LLD.
+- **Performance**: Queue-related queries use Prisma transactions (`src/lib/queueTransactions.ts`) and additional indexes in `schema.prisma` to keep token operations consistent and fast as data grows.

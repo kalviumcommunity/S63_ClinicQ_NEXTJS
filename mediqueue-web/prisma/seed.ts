@@ -60,7 +60,6 @@ async function main() {
 
   // No initial tokens/queues; those will be created by the app flows.
   // This seed is idempotent thanks to upsert usage.
-  // eslint-disable-next-line no-console
   console.log("Prisma seed data inserted successfully");
 }
 
@@ -69,7 +68,6 @@ main()
     await prisma.$disconnect();
   })
   .catch(async (e) => {
-    // eslint-disable-next-line no-console
     console.error(e);
     await prisma.$disconnect();
     process.exit(1);

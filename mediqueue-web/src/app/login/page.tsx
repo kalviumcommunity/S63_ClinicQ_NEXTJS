@@ -3,15 +3,18 @@
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { Button } from "@/components";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function LoginPage() {
   const router = useRouter();
+  const { login } = useAuth();
 
   async function handleLogin() {
     const res = await fetch("/api/auth/login", { method: "POST" });
     const data = (await res.json()) as { token?: string };
     if (data.token) {
       Cookies.set("token", data.token, { sameSite: "lax", path: "/" });
+      login("operator");
       router.push("/dashboard");
     }
   }

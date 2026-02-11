@@ -1,8 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import Cookies from "js-cookie";
+import { useAuth } from "@/hooks/useAuth";
+import { useUI } from "@/hooks/useUI";
+import { Button } from "@/components";
 
 export default function Header() {
+  const { user, logout, isAuthenticated } = useAuth();
+  const { theme, toggleTheme, sidebarOpen, toggleSidebar } = useUI();
+
   return (
     <header
       className="flex w-full items-center justify-between border-b border-zinc-200 bg-emerald-600 px-4 py-3 text-white dark:border-zinc-800"
@@ -13,19 +20,24 @@ export default function Header() {
           MediQueue
         </Link>
       </h1>
-      <nav className="flex flex-wrap items-center gap-4" aria-label="Main">
+      <nav
+        className="flex flex-wrap items-center gap-3 sm:gap-4"
+        aria-label="Main"
+      >
         <Link
           href="/"
           className="text-sm font-medium text-white/90 hover:text-white"
         >
           Home
         </Link>
-        <Link
-          href="/login"
-          className="text-sm font-medium text-white/90 hover:text-white"
-        >
-          Login
-        </Link>
+        {!isAuthenticated && (
+          <Link
+            href="/login"
+            className="text-sm font-medium text-white/90 hover:text-white"
+          >
+            Login
+          </Link>
+        )}
         <Link
           href="/dashboard"
           className="text-sm font-medium text-white/90 hover:text-white"
@@ -38,6 +50,34 @@ export default function Header() {
         >
           Users
         </Link>
+        {isAuthenticated && user && (
+          <span className="text-sm text-white/90" title="Logged in">
+            {user}
+          </span>
+        )}
+        {isAuthenticated && (
+          <Button
+            label="Logout"
+            onClick={() => {
+              Cookies.remove("token", { path: "/" });
+              logout();
+            }}
+            variant="secondary"
+            className="bg-white/20! text-white! hover:bg-white/30!"
+          />
+        )}
+        <Button
+          label={theme === "dark" ? "Light" : "Dark"}
+          onClick={toggleTheme}
+          variant="secondary"
+          className="bg-white/20! text-white! hover:bg-white/30!"
+        />
+        <Button
+          label={sidebarOpen ? "Hide sidebar" : "Show sidebar"}
+          onClick={toggleSidebar}
+          variant="secondary"
+          className="bg-white/20! text-white! hover:bg-white/30!"
+        />
       </nav>
     </header>
   );

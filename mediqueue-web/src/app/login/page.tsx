@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { Button } from "@/components";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,13 +24,7 @@ export default function LoginPage() {
       <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
         Sign in to access the staff dashboard.
       </p>
-      <button
-        type="button"
-        onClick={handleLogin}
-        className="mt-6 rounded-lg bg-emerald-600 px-5 py-2.5 font-medium text-white transition-colors hover:bg-emerald-700"
-      >
-        Login
-      </button>
+      <Button label="Login" onClick={handleLogin} className="mt-6" />
     </main>
   );
 }

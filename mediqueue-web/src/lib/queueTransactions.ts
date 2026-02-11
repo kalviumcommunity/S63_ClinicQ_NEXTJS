@@ -131,7 +131,6 @@ export async function safelyCallNextToken(queueId: string, counterId: string) {
 
     return result;
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error("Transaction failed. Rolling back.", error);
     throw error;
   }

@@ -25,6 +25,26 @@ export default function Home() {
           </div>
         </header>
 
+        {/* Security Demo Link */}
+        <section className="rounded-2xl border border-emerald-200 bg-emerald-50/50 p-6 dark:border-emerald-800 dark:bg-emerald-950/20">
+          <div className="flex items-center justify-between">
+            <div>
+              <h2 className="text-lg font-semibold text-emerald-800 dark:text-emerald-200">
+                🔒 Security Features Demo
+              </h2>
+              <p className="mt-2 text-sm text-emerald-700 dark:text-emerald-300">
+                Test our OWASP-compliant input sanitization and XSS/SQL injection prevention
+              </p>
+            </div>
+            <a
+              href="/security-demo"
+              className="rounded-lg bg-emerald-600 px-4 py-2 text-sm font-medium text-white hover:bg-emerald-700 transition-colors"
+            >
+              Try Security Demo
+            </a>
+          </div>
+        </section>
+
         <section className="grid gap-6 md:grid-cols-3">
           <RoleCard
             title="Patient Portal"
@@ -79,6 +99,7 @@ export default function Home() {
               <li>✔️ Next.js 14 + TypeScript + Tailwind base app</li>
               <li>✔️ Clean `src/app`, `src/components`, and `src/lib` hierarchy</li>
               <li>✔️ Documentation aligned with MediQueue HLD / LLD</li>
+              <li>✔️ OWASP-compliant security features</li>
             </ul>
           </div>
         </section>

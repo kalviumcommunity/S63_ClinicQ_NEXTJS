@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { Button } from "@/components";
 import { useAuth } from "@/hooks/useAuth";
+import type { Role } from "@/config/roles";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,10 +12,16 @@ export default function LoginPage() {
 
   async function handleLogin() {
     const res = await fetch("/api/auth/login", { method: "POST" });
-    const data = (await res.json()) as { token?: string };
+    const data = (await res.json()) as {
+      token?: string;
+      user?: { id: string; role: Role };
+    };
     if (data.token) {
       Cookies.set("token", data.token, { sameSite: "lax", path: "/" });
-      login("operator");
+      login({
+        name: data.user?.id ?? "operator",
+        role: data.user?.role ?? "admin",
+      });
       router.push("/dashboard");
     }
   }

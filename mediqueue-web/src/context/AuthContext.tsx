@@ -7,19 +7,26 @@ import {
   type ReactNode,
 } from "react";
 
+import type { Role } from "@/config/roles";
+
+export interface AuthUser {
+  name: string;
+  role: Role;
+}
+
 export interface AuthContextType {
-  user: string | null;
-  login: (username: string) => void;
+  user: AuthUser | null;
+  login: (user: AuthUser) => void;
   logout: () => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<string | null>(null);
+  const [user, setUser] = useState<AuthUser | null>(null);
 
-  const login = (username: string) => {
-    setUser(username);
+  const login = (authUser: AuthUser) => {
+    setUser(authUser);
   };
 
   const logout = () => {

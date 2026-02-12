@@ -10,5 +10,6 @@ export function useAuth() {
     user,
     login,
     logout,
+    role: user?.role ?? null,
   };
 }

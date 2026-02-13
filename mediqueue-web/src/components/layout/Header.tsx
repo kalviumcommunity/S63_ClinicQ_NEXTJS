@@ -52,7 +52,7 @@ export default function Header() {
         </Link>
         {isAuthenticated && user && (
           <span className="text-sm text-white/90" title="Logged in">
-            {user}
+            {user.name} ({user.role})
           </span>
         )}
         {isAuthenticated && (

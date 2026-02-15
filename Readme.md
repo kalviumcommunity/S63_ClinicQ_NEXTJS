@@ -360,3 +360,40 @@ Confirmed successful render after reset
 Reflection
 
 Handling loading and error states improves user trust and ensures a resilient, user-friendly application.
+
+Assignment 34: Secure JWT & Session Management
+Overview
+
+Implemented secure authentication using access and refresh tokens with expiry handling and token validation.
+
+Implementation
+
+Generated short-lived access tokens
+
+Implemented long-lived refresh tokens
+
+Stored refresh token in HTTP-only cookie
+
+Added middleware for protected routes
+
+Implemented automatic token refresh flow
+
+Security Measures
+
+Avoided storing tokens in localStorage
+
+Used SameSite and secure cookie settings
+
+Implemented token expiry and rotation
+
+Testing
+
+Simulated expired access token
+
+Verified refresh flow
+
+Confirmed protected route security
+
+Reflection
+
+Designed authentication flow to balance security and usability while mitigating XSS, CSRF, and token replay risks.

@@ -42,3 +42,34 @@
 - **Components**: Root layout uses `LayoutWrapper` (Header + Sidebar + main). Shared UI (Button, Card, InputField) use props contracts and barrel `@/components` for consistency and reuse.
 - **State**: AuthContext (user, login, logout) and UIContext (theme, sidebar open) wrapped in `Providers`; `useAuth` and `useUI` expose state and actions so layout and pages stay declarative and avoid prop-drilling.
 - **RBAC**: Simple role hierarchy (`src/config/roles.ts`) with helpers and logs; JWT payload carries `role`, enforced in `/api/admin/delete-demo` and reflected in the Dashboard buttons (Delete/Edit/View) for clear allow/deny behaviour.
+
+## 🔐 Assignment 28: Authentication APIs (Signup & Login)
+
+### Overview
+
+This project implements secure authentication using bcrypt for password hashing and JWT (JSON Web Token) for session management.
+
+Authentication verifies the identity of a user before granting access to protected routes.
+
+---
+
+### Signup API
+
+**Endpoint:** `POST /api/auth/signup`
+
+**Flow:**
+
+1. Accepts name, email, and password.
+2. Checks if user already exists.
+3. Hashes password using bcrypt (salt rounds = 10).
+4. Stores hashed password in database.
+5. Returns success response.
+
+**Sample Request:**
+
+```json
+{
+  "name": "Alice",
+  "email": "alice@example.com",
+  "password": "mypassword"
+}

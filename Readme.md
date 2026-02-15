@@ -310,3 +310,28 @@ Environment variables for API keys
 Consideration of rate limits and bounce monitoring
 
 Reflection - Transactional emails improve trust and automation. Proper verification, logging, and monitoring ensure secure and reliable delivery.
+
+Assignment 32: Responsive & Themed Design
+Overview
+
+Built a responsive and theme-aware UI using TailwindCSS with custom breakpoints and brand colors.
+
+Implementation
+
+Configured Tailwind theme and screens
+
+Applied responsive utility classes
+
+Enabled light/dark mode toggle
+
+Used dark variants for styling
+
+Testing
+
+Verified layout on mobile, tablet, and desktop
+
+Checked readability and smooth theme switching
+
+Reflection
+
+Ensured consistent design, accessibility, and usability across devices and themes.

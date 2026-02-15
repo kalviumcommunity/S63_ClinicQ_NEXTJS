@@ -335,3 +335,28 @@ Checked readability and smooth theme switching
 Reflection
 
 Ensured consistent design, accessibility, and usability across devices and themes.
+
+Assignment 33: Error & Loading States
+Overview
+
+Implemented graceful handling of asynchronous states using loading skeletons and error boundaries in Next.js App Router.
+
+Implementation
+
+Added loading.js with skeleton UI
+
+Added error.js with retry functionality
+
+Simulated network delay and API failures
+
+Testing
+
+Verified loading state under slow network
+
+Tested error fallback and retry behavior
+
+Confirmed successful render after reset
+
+Reflection
+
+Handling loading and error states improves user trust and ensures a resilient, user-friendly application.

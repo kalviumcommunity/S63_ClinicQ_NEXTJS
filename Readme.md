@@ -121,3 +121,59 @@ Centralized authorization logic
 Reflection
 
 Authorization middleware is critical in healthcare systems because medical data is highly sensitive. By centralizing RBAC and consent checks, we ensure secure, controlled, and privacy-first access to patient records.
+
+🚨 Assignment 22: Centralized Error Handling Middleware
+Overview
+
+This assignment implements a centralized error handling system for the application. Instead of handling errors separately in every route, all errors are processed through a single reusable layer.
+
+The goal is to ensure:
+
+Consistent error responses
+
+Secure production behavior
+
+Structured logging for debugging
+
+Clean separation between user-facing messages and internal logs
+
+Why Centralized Error Handling?
+
+Modern applications fail in different ways (database issues, API failures, validation errors). Without a unified system:
+
+Error responses become inconsistent
+
+Debugging becomes difficult
+
+Sensitive system details may leak in production
+
+A centralized handler ensures that:
+
+All errors follow the same response format
+
+Stack traces are hidden in production
+
+Detailed logs are preserved internally
+
+Development vs Production Behavior
+Environment	What User Sees	Internal Logs
+Development	Detailed error message + stack trace	Full details logged
+Production	Generic safe message	Detailed error logged (stack redacted externally)
+
+This approach protects user trust while maintaining strong observability for developers.
+
+What Was Implemented
+
+A structured logging system for consistent error tracking
+
+A reusable centralized error handling function
+
+Environment-based behavior (dev vs prod)
+
+Secure, minimal responses for production users
+
+Reflection
+
+Centralized error handling improves debugging efficiency by creating structured, searchable logs. It also prevents accidental exposure of sensitive system information in production.
+
+A professional system does not just run successfully — it fails gracefully. By separating internal logs from user-facing responses, the application becomes more secure, maintainable, and scalable.

@@ -72,7 +72,8 @@ Authentication verifies the identity of a user before granting access to protect
   "name": "Alice",
   "email": "alice@example.com",
   "password": "mypassword"
-}
+} ```
+
 🔐 Assignment 21: Authorization Middleware (RBAC)
 Overview
 
@@ -177,3 +178,52 @@ Reflection
 Centralized error handling improves debugging efficiency by creating structured, searchable logs. It also prevents accidental exposure of sensitive system information in production.
 
 A professional system does not just run successfully — it fails gracefully. By separating internal logs from user-facing responses, the application becomes more secure, maintainable, and scalable.
+
+⚡ Assignment 23: Caching Layer with Redis
+Overview
+
+Implemented Redis as a caching layer to improve API performance and reduce database load. Frequently requested data is stored temporarily in memory and served quickly on repeated requests.
+
+Why Caching?
+
+Reduces database queries
+
+Improves response time
+
+Handles higher traffic efficiently
+
+Cache Strategy
+
+Used the Cache-Aside (Lazy Loading) pattern:
+
+Check Redis for cached data
+
+If cache hit → return data instantly
+
+If cache miss → fetch from database
+
+Store result in Redis with TTL
+
+TTL Policy
+
+Cached data expires automatically after a defined time (e.g., 60 seconds)
+
+Prevents long-term stale data
+
+Cache Invalidation
+
+Cache is cleared whenever data is updated
+
+Ensures consistency between Redis and database
+
+Results
+
+First request → Database hit (slower)
+
+Subsequent requests → Cache hit (significantly faster)
+
+Noticeable reduction in API latency
+
+Reflection
+
+Caching improves scalability and performance but introduces stale data risk. Proper TTL and invalidation strategies are essential to maintain cache coherence and system reliability.

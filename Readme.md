@@ -270,3 +270,43 @@ Lifecycle policy for automatic cleanup
 Reflection
 
 Pre-signed URLs improve scalability and security by offloading file transfer to cloud storage while keeping credentials hidden. Short-lived URLs and lifecycle policies reduce long-term security and cost risks.
+
+
+Assignment 25: Transactional Email Service Integration
+
+Overview
+Integrated a transactional email service (AWS SES or SendGrid) to send automated emails such as welcome messages and notifications. The service is securely configured using environment variables and verified sender authentication.
+
+Implementation
+
+Configured email provider and verified sender
+
+Created backend API to send HTML emails
+
+Implemented a reusable email template
+
+Logged message ID for tracking
+
+Email Flow
+
+Client triggers an event (e.g., signup).
+
+Backend sends email through provider.
+
+Provider returns message ID for logging.
+
+Sandbox vs Production
+
+Sandbox allows emails only to verified addresses.
+
+Production requires domain verification for real users.
+
+Security
+
+No hardcoded credentials
+
+Environment variables for API keys
+
+Consideration of rate limits and bounce monitoring
+
+Reflection - Transactional emails improve trust and automation. Proper verification, logging, and monitoring ensure secure and reliable delivery.

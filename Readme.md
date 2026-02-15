@@ -73,3 +73,51 @@ Authentication verifies the identity of a user before granting access to protect
   "email": "alice@example.com",
   "password": "mypassword"
 }
+🔐 Assignment 21: Authorization Middleware (RBAC)
+Overview
+
+This middleware enforces Role-Based Access Control (RBAC) in our Digital Health Records System to protect sensitive medical data.
+
+It ensures that only authorized users can access specific routes based on their role.
+
+Roles
+
+patient
+
+doctor
+
+admin
+
+Each role has restricted permissions aligned with our healthcare privacy requirements.
+
+How It Works
+
+Verifies JWT from Authorization header.
+
+Extracts user role.
+
+Grants or denies access based on role.
+
+Enforces consent checks when doctors access patient records.
+
+Access Rules
+
+Patients → Access their own dashboard.
+
+Doctors → Access patient records only with consent.
+
+Admin → Access system-level routes.
+
+Unauthorized access → 403 Forbidden.
+
+Security Principles
+
+Least privilege access
+
+Consent-based medical record sharing
+
+Centralized authorization logic
+
+Reflection
+
+Authorization middleware is critical in healthcare systems because medical data is highly sensitive. By centralizing RBAC and consent checks, we ensure secure, controlled, and privacy-first access to patient records.

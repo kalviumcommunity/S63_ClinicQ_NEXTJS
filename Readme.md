@@ -67,12 +67,12 @@ Authentication verifies the identity of a user before granting access to protect
 
 **Sample Request:**
 
-```json
+json
 {
   "name": "Alice",
   "email": "alice@example.com",
   "password": "mypassword"
-} ```
+} 
 
 🔐 Assignment 21: Authorization Middleware (RBAC)
 Overview
@@ -227,3 +227,46 @@ Noticeable reduction in API latency
 Reflection
 
 Caching improves scalability and performance but introduces stale data risk. Proper TTL and invalidation strategies are essential to maintain cache coherence and system reliability.
+
+📁 Assignment 24: File Upload with Pre-Signed URLs
+Overview
+
+Implemented secure file uploads using pre-signed URLs. Files are uploaded directly to cloud storage (AWS S3 / Azure Blob) without passing through the backend server.
+
+Why Pre-Signed URLs?
+
+Keeps cloud credentials secure
+
+Reduces backend load
+
+Improves upload performance
+
+Scales efficiently
+
+Upload Flow
+
+Client requests pre-signed URL from backend
+
+Backend validates file type and size
+
+Backend generates temporary signed URL
+
+Client uploads file directly to cloud storage
+
+File URL is stored in database
+
+Security Measures
+
+Short URL expiry (30–120 seconds)
+
+File type validation (images / PDFs only)
+
+File size restriction
+
+Private bucket configuration
+
+Lifecycle policy for automatic cleanup
+
+Reflection
+
+Pre-signed URLs improve scalability and security by offloading file transfer to cloud storage while keeping credentials hidden. Short-lived URLs and lifecycle policies reduce long-term security and cost risks.
